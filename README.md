@@ -8,5 +8,5 @@ Club Penguin AS2 Dependencies Manager
   <li>Custom Badges</li>
   <li>Outfit Saver</li>
   <li>Dynamic Emote System</li>
-  <li>Custom/Plugin Services Manager</li>
+  <li>Custom Plugin/Services Manager</li>
 </ul>
