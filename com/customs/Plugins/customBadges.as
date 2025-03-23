@@ -19,53 +19,10 @@
 		SHELL.GLOBAL_CRUMBS.global_path.mod_panel =  SHELL.getGlobalContentPath() + "content/modpanel.swf";
 		SHELL.LOCAL_CRUMBS.lang.mod_panel = "Moderator Panel";
 		SHELL.parseJson = parseJson;
-
-		
-		//SHELL.superUser = superUser;
-		//SHELL.IN_SUPER_MODE = false;
 		
 	}
-	/*public function movePlayer() {
-    var Players = SHELL.getPlayerList();
 
-    for (var i in Players) {
-        if (Players[i].player_id === INTERFACE.getActivePlayerId()) {
-            var player_id = Players[i].player_id;
-            var playerClip = ENGINE.getPlayerMovieClip(player_id);
-
-            playerClip.player_id = player_id; 
-            playerClip.onPress = function() {
-                this.startDrag(true);
-
-                var nickname_mc = ENGINE.getNicknameMovieClip(this.player_id);
-                var bubble_mc = ENGINE.getBalloonMovieClip(this.player_id);
-
-                nickname_mc._visible = false;
-                bubble_mc._visible = false;
-            }
-
-            playerClip.onRelease = function() {
-                this.stopDrag();
-
-                var nickname_mc = ENGINE.getNicknameMovieClip(this.player_id);
-                var bubble_mc = ENGINE.getBalloonMovieClip(this.player_id);
-
-                nickname_mc._visible = true;
-                nickname_mc._x = this._x;
-                nickname_mc._y = this._y;
-
-                bubble_mc._visible = true;
-                bubble_mc._x = this._x;
-                bubble_mc._y = this._y;
-				
-				//Sends "o#mpl" to the server and then you can use "sp" to send to the client
-                AIRTOWER.send(AIRTOWER.PLAY_EXT, AIRTOWER.MODERATION_HANDLER + "#" + AIRTOWER.MOVE_PLAYER, [this.player_id, this._x, this._y], "str", SHELL.getCurrentServerRoomId());
-            }
-        }
-    }
-}
-*/
-	public function showPlayerWidget(playerID, nickname) {
+        public function showPlayerWidget(playerID, nickname) {
 		_paperdoll = new com.clubpenguin.ui.PaperDollRev();
 		_paperdoll.__set__shell(SHELL);
 		_paperdoll.__set__ui(this);
