@@ -23,5 +23,4 @@
 			}
 		}
 	}
-	var allowPlugins = [com.customs.Plugins.outfitSaver, com.customs.Plugins.customPrompts, com.customs.Plugins.inventoryHints, com.customs.Plugins.customBadges, com.customs.Plugins.npc.NPCManager, com.customs.Plugins.customEmotes, com.customs.Plugins.penguinGlows, com.customs.Plugins.customItems,  com.customs.Plugins.RoomPin, com.customs.Plugins.ScavengerHunt];
 }

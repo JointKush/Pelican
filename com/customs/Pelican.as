@@ -28,6 +28,7 @@
 		_shell.setNPCData(_loc2.getServiceData("NPC"));
 	    _shell.setCustomItemsData(_loc2.getServiceData("CUSTOM_ITEMS"));
 		_shell.setRoomPinData(_loc2.getServiceData("ROOM_PIN"));
+		_shell.setPartyData(_loc2.getServiceData("PARTIES"));
 	} 
 	public function stringify(obj) {
 		return (com.clubpenguin.util.JSONParser.stringify(obj));
