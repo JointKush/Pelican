@@ -18,6 +18,7 @@ class com.customs.Plugins.partySwitcher {
 		SHELL.setPartyData = setPartyData;
 		SHELL.getPartyObjByKey = getPartyObjByKey;
 		flash.external.ExternalInterface.addCallback("updateParty", null, updateParty);
+		flash.external.ExternalInterface.call("showPartySwitcher");
 
 	}
 	public function setPartyData(obj) {
