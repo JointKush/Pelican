@@ -1,4 +1,4 @@
-﻿class com.customs.Plugins.partySwitcher {
+class com.customs.Plugins.partySwitcher {
 	
 	static var INTERFACE, SHELL, AIRTOWER, ENGINE;
 	public function partySwitcher () {
@@ -13,6 +13,8 @@
 	
 	public function setOverride() : Void {
 		SHELL.party_obj = {};
+		var roomCrumbs = SHELL.getRoomCrumbs();
+		SHELL.oldRoomCrumbs = com.clubpenguin.util.JSONParser.parse(com.clubpenguin.util.JSONParser.stringify(roomCrumbs)); 
 		SHELL.setPartyData = setPartyData;
 		SHELL.getPartyObjByKey = getPartyObjByKey;
 		flash.external.ExternalInterface.addCallback("updateParty", null, updateParty);
@@ -28,23 +30,24 @@
 		}
 	}
 	public function updateParty(party_key) {
+		var party:Object = SHELL.party_obj[party_key];
+		if (!party && party_key !== "default" || !party.party_active && party_key !== "default") {
+			return SHELL.showErrorPrompt("max", !party ? "Unable to switch as this party does not exist" : "This party isn't currently active, try a different one", "Okay", undefined, "");
+		}
+		
+		var roomCrumbs:Object = SHELL.getRoomCrumbs();
+		var isDefault:Boolean = (party_key == "default");
+		
+		for (var room_name: String in roomCrumbs) {
+			roomCrumbs[room_name].path = SHELL.getGlobalContentPath() + (isDefault ? "rooms/" : "rooms/parties/" + party_key + "/") + room_name + ".swf";
 			
-		var party = SHELL.party_obj[party_key];
-        if (party == undefined) {
-            return (SHELL.showErrorPrompt("max", "Unable to switch as this party does not exist", "Okay", undefined, ""));
-        }        
-		var roomCrumbs = SHELL.getRoomCrumbs();
-
-		for (var room_name:String in roomCrumbs) {
-			roomCrumbs[room_name].path = SHELL.getGlobalContentPath() + "rooms/parties/" + party_key + "/" + room_name + ".swf";
+			roomCrumbs[room_name].music_id = party.party_rooms.hasOwnProperty(room_name) ?
+			  party.party_rooms[room_name] : (isDefault ? SHELL.oldRoomCrumbs[room_name].music_id : 0);
 			
-			if (party.party_rooms.hasOwnProperty(room_name)) {
-
-				roomCrumbs[room_name].music_id = party.party_rooms[room_name];
-			} else {
-				roomCrumbs[room_name].music_id = 0; 
+			if (isDefault) {
+			  flash.external.ExternalInterface.call("console.log", "Old Room Music IDs updated " + roomCrumbs[room_name].music_id);
 			}
 		}
-		ENGINE.handleRefreshRoom();
+    	ENGINE.handleRefreshRoom();
 	}
 }
