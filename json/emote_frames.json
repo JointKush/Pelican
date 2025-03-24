@@ -1,0 +1,129 @@
+[
+    {
+      "frame_balloon_id": 1,
+      "frame_menu_id": 1,
+      "emote_name": "Laughing Face",
+      "disabled": true
+    },
+    {
+      "frame_balloon_id": 2,
+      "frame_menu_id": 2,
+      "emote_name": "Smiley"
+    },
+    {
+      "frame_balloon_id": 13,
+      "frame_menu_id": 3,
+      "emote_name": "Coffee Cup"
+    },
+    {
+      "frame_balloon_id": 3,
+      "frame_menu_id": 4,
+      "emote_name": "Straight Face"
+    },
+    {
+      "frame_balloon_id": 4,
+      "frame_menu_id": 5,
+      "emote_name": "Frown"
+    },
+    {
+      "frame_balloon_id": 18,
+      "frame_menu_id": 6,
+      "emote_name": "Game"
+    },
+    {
+      "frame_balloon_id": 5,
+      "frame_menu_id": 7,
+      "emote_name": "Surprise"
+    },
+    {
+      "frame_balloon_id": 6,
+      "frame_menu_id": 8,
+      "emote_name": "Sticking Out Tongue"
+    },
+    {
+      "frame_balloon_id": 29,
+      "frame_menu_id": 9,
+      "emote_name": "Popcorn"
+    },
+    {
+      "frame_balloon_id": 7,
+      "frame_menu_id": 10,
+      "emote_name": "Wink"
+    },
+    {
+      "frame_balloon_id": 8,
+      "frame_menu_id": 11,
+      "emote_name": "Green Sickly Face"
+    },
+    {
+      "frame_balloon_id": 24,
+      "frame_menu_id": 12,
+      "emote_name": "Pizza"
+    },
+    {
+      "frame_balloon_id": 9,
+      "frame_menu_id": 13,
+      "emote_name": "Red Angry Face",
+      "disabled": true
+    },
+    {
+      "frame_balloon_id": 10,
+      "frame_menu_id": 14,
+      "emote_name": "Sad Face"
+    },
+    {
+      "frame_balloon_id": 26,
+      "frame_menu_id": 15,
+      "emote_name": "Ice Cream"
+    },
+    {
+      "frame_balloon_id": 11,
+      "frame_menu_id": 16,
+      "emote_name": "Meh Face"
+    },
+    {
+      "frame_balloon_id": 28,
+      "frame_menu_id": 17,
+      "emote_name": "Cake"
+    },
+    {
+      "frame_balloon_id": 17,
+      "frame_menu_id": 18,
+      "emote_name": "Clover"
+    },
+    {
+      "frame_balloon_id": 30,
+      "frame_menu_id": 19,
+      "emote_name": "Heart"
+    },
+    {
+      "frame_balloon_id": 12,
+      "frame_menu_id": 20,
+      "emote_name": "Lightbulb"
+    },
+    {
+      "frame_balloon_id": 16,
+      "frame_menu_id": 21,
+      "emote_name": "Flower"
+    },
+    {
+      "frame_balloon_id": 40,
+      "frame_menu_id": 22,
+      "emote_name": "Skull"
+    },
+    {
+      "frame_balloon_id": 41,
+      "frame_menu_id": 23,
+      "emote_name": "Shocked Face"
+    },
+    {
+      "frame_balloon_id": 42,
+      "frame_menu_id": 24,
+      "emote_name": "The Nigger"
+    },
+    {
+      "frame_balloon_id": 43,
+      "frame_menu_id": 25,
+      "emote_name": "Pink Flower"
+    }
+  ]

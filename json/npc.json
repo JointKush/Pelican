@@ -1,0 +1,46 @@
+{
+    "100_npc": {
+      "uniqueId": 9000234,
+      "username": "[NPC] AI",
+      "bitmask": 1,
+      "itemsObj": {
+        "colour_id": 8,
+        "head": 0,
+        "face": 26,
+        "neck": 256,
+        "body": 467,
+        "hand": 0,
+        "feet": 0,
+        "flag_id": 0,
+        "photo_id": 0,
+        "x_corr": 467, 
+        "y_corr": 256, 
+        "frame": 0,
+        "is_member": 1,
+        "total_membership_days": 0
+      },
+      "isEnabled": true
+    },
+    "801_npc": {
+      "uniqueId": 9000251,
+      "username": "[NPC] Pelican",
+      "bitmask": 1,
+      "itemsObj": {
+        "colour_id": 0,
+        "head": 0,
+        "face": 0,
+        "neck": 0,
+        "body": 0,
+        "hand": 0,
+        "feet": 0,
+        "flag_id": 0,
+        "photo_id": 0,
+        "x_corr": 100,
+        "y_corr": 100,
+        "frame": 0,
+        "is_member": 1,
+        "total_membership_days": 0
+      },
+      "isEnabled": true
+    }
+  }
