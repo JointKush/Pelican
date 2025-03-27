@@ -31,7 +31,7 @@ class com.customs.Plugins.partySwitcher {
 		}
 	}
 	public function updateParty(party_key) {
-		var party:Object = SHELL.party_obj[party_key];
+		var party:Object = SHELL.getPartyObjByKey(party_key);
 		if (!party && party_key !== "default" || !party.party_active && party_key !== "default") {
 			return SHELL.showErrorPrompt("max", !party ? "Unable to switch as this party does not exist" : "This party isn't currently active, try a different one", "Okay", undefined, "");
 		}
