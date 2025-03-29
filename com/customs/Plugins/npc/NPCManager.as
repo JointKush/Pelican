@@ -43,7 +43,7 @@
 		} 
 		SHELL.getPlayerOutfit(_loc1.player_id);
 	}
-	public function handleStartNPC(obj) {
+	/*public function handleStartNPC(obj) {
 		obj.shift();
 		var room_id = obj.shift()
 		var _loc4 = SHELL.npcObjStr;
@@ -63,9 +63,36 @@
 				}
 			}
 		}
-	}
-	
+	}*/
+	public function handleStartNPC(obj) {
+		obj.shift();
+		var room_id = obj.shift()
+		var _loc4 = SHELL.npcObjStr;
+		for (var key in _loc4) {
+			if (_loc4.hasOwnProperty(key)) {
+				var item = _loc4[key];
+				var roomId = key.split('_')[0];
+				if (roomId === room_id) {
+					var joinArr = [item.uniqueId, item.username, item.bitmask];
+					var orderedKeys = [
+						"colour_id", "head", "face", "neck", "body", 
+						"hand", "feet", "flag_id", "photo_id", "x_corr", 
+						"y_corr", "frame", "is_member", "total_membership_days"
+					];
+					for (var i = 0; i < orderedKeys.length; i++) {
+						var objKey = orderedKeys[i];
+						joinArr.push(item.itemsObj[objKey]);
+					}
+					var npcStr = joinArr.join('|');
+					if(item.isEnabled) {
+						SHELL.sendNPCToRoom(roomId, npcStr);
+						flash.external.ExternalInterface.call("console.log", "NPC String: " + npcStr + " Room ID: " + roomId);
 
+					}
+				}
+			}
+		}
+	}
 	public function setNPCData(npcData) {
 		SHELL.npcObjStr = npcData;
 	}
