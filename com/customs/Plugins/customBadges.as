@@ -1,14 +1,12 @@
 ﻿class com.customs.Plugins.customBadges {
 	
-	static var INTERFACE, SHELL, AIRTOWER, ENGINE, badgeHintTextArr, _paperdoll;
+	static var INTERFACE, SHELL, AIRTOWER, ENGINE, badgeHintTextMap, _paperdoll;
 	public function customBadges () {
 		trace("Loaded Custom Badges Plugin");
 		INTERFACE = com.customs.Pelican._interface;
 		SHELL = com.customs.Pelican._shell;
 		AIRTOWER = com.customs.Pelican._airtower;
-		ENGINE = com.customs.Pelican._engine;
-		badgeHintTextArr = ["Designer", "Moderator", "Developer", "Administrator"];
-		
+		ENGINE = com.customs.Pelican._engine;		
 		this.setOverride();
 	}
 	
@@ -19,10 +17,15 @@
 		SHELL.GLOBAL_CRUMBS.global_path.mod_panel =  SHELL.getGlobalContentPath() + "content/modpanel.swf";
 		SHELL.LOCAL_CRUMBS.lang.mod_panel = "Moderator Panel";
 		SHELL.parseJson = parseJson;
+		badgeHintTextMap = new Object();
+		badgeHintTextMap[1] = "Designer";
+		badgeHintTextMap[2] = "Moderator";
+		badgeHintTextMap[3] = "Developer";
+		badgeHintTextMap[4] = "Administrator";
 		
 	}
 
-        public function showPlayerWidget(playerID, nickname) {
+	public function showPlayerWidget(playerID, nickname) {
 		_paperdoll = new com.clubpenguin.ui.PaperDollRev();
 		_paperdoll.__set__shell(SHELL);
 		_paperdoll.__set__ui(this);
@@ -107,10 +110,10 @@
 		BADGE._visible = false;
 		if (player_ob.badge) {
 			BADGE._visible = true;
-			BADGE.gotoAndStop(player_ob.badge);
+			BADGE.gotoAndStop(badgeHintTextMap[player_ob.badge]);
 			BADGE.onRollOver = function() {
 				var badge = player_ob.badge;
-				INTERFACE.showHint(this, badgeHintTextArr[--badge], true);
+				INTERFACE.showHint(this, badgeHintTextMap[badge], true);
 			}
 			BADGE.onRollOut = INTERFACE.closeHint;	
 		}
@@ -154,42 +157,55 @@
 		return (data);
 	}
 	
-	public function makePlayerObjectFromString(player_string) {
-		var _local2 = player_string.split("|");
-		var _local3 = Number(_local2[0]);
-		var _local4 = String(_local2[1]);
-		var _local6 = Number(_local2[2]);
-		var _local5;
-		if (SHELL.isValidString(_local4)) {
-			_local5 = com.clubpenguin.util.Localization.getLocalizedNickname(_local3, _local4, _local6, SHELL.getLanguageBitmask());
-		} else if (SHELL.isPlayerMascotById(_local3)) {
-			_local5 = SHELL.getMascotNicknameByID(_local3);
-		}
-		var _local1 = new Object();
-		_local1.nickname = _local5;
-		_local1.username = _local4;
-		_local1.player_id = _local3;
-		_local1.colour_id = Number(_local2[3]) || 0;
-		_local1.head = Number(_local2[4]) || 0;
-		_local1.face = Number(_local2[5]) || 0;
-		_local1.neck = Number(_local2[6]) || 0;
-		_local1.body = Number(_local2[7]) || 0;
-		_local1.hand = Number(_local2[8]) || 0;
-		_local1.feet = Number(_local2[9]) || 0;
-		_local1.flag_id = Number(_local2[10]) || 0;
-		_local1.photo_id = Number(_local2[11]) || 0;
-		_local1.x = Number(_local2[12]) || 0;
-		_local1.y = Number(_local2[13]) || 0;
-		_local1.frame = Number(_local2[14]) || 0;
-		_local1.is_member = Boolean(Number(_local2[15]) || 0);
-		_local1.total_membership_days = Number(_local2[16]) || 0;
-		_local1.badge = Number(_local2[17]) || 0;
-		_local1.p_attributes = {ng: _local2[18], nc: _local2[19], bc: _local2[20], sbc: _local2[23], sbt: _local2[24], btc: _local2[25]};
-		_local1.outfit_hues = SHELL.parseJson(_local2[21]);
-		_local1.outfits = SHELL.parseJson(_local2[22]);
-		_local1.frame_hack = SHELL.buildFrameHacksString(_local1);
-		_local1.thrownSnowballInCurrentRoom = false;
-		_local1.emoteIDDisplayedInCurrentRoom = -1;
-		return (_local1);
-	}
+    public function makePlayerObjectFromString(player_string) {
+        var parts = player_string.split("|");
+        
+        var playerId = Number(parts[0]);
+        var username = String(parts[1]);
+        var colourId = Number(parts[3]) || 0;
+        var head = Number(parts[4]) || 0;
+        var face = Number(parts[5]) || 0;
+        var neck = Number(parts[6]) || 0;
+        var body = Number(parts[7]) || 0;
+        var hand = Number(parts[8]) || 0;
+        var feet = Number(parts[9]) || 0;
+        var flagId = Number(parts[10]) || 0;
+        var photoId = Number(parts[11]) || 0;
+        
+        var playerObj = {
+            nickname: username,
+            username: username,
+            player_id: playerId,
+            colour_id: colourId,
+            head: head,
+            face: face,
+            neck: neck,
+            body: body,
+            hand: hand,
+            feet: feet,
+            flag_id: flagId,
+            photo_id: photoId,
+            x: Number(parts[12]) || 0,
+            y: Number(parts[13]) || 0,
+            frame: Number(parts[14]) || 0,
+            is_member: Boolean(Number(parts[15]) || 0),
+            total_membership_days: Number(parts[16]) || 0,
+            badge: Number(parts[17]) || 0,
+            p_attributes: {
+                ng: parts[18],
+                nc: parts[19],
+                bc: parts[20],
+                sbc: parts[23],
+                sbt: parts[24],
+                btc: parts[25]
+            },
+            outfit_hues: SHELL.parseJson(parts[21]),
+            outfits: SHELL.parseJson(parts[22]),
+            frame_hack: SHELL.buildFrameHacksString(playerObj),
+            thrownSnowballInCurrentRoom: false,
+            emoteIDDisplayedInCurrentRoom: -1
+        };
+
+        return playerObj;
+    }
 }
