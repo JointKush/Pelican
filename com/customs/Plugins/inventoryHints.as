@@ -1,4 +1,8 @@
-﻿class com.customs.Plugins.inventoryHints {
+/**
+TODO: Rewrite the search system and inventory system, it's pretty messy.
+**/
+
+class com.customs.Plugins.inventoryHints {
 	
 	static var INTERFACE, SHELL, ENGINE;
 	public function inventoryHints () {
