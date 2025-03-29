@@ -43,27 +43,6 @@
 		} 
 		SHELL.getPlayerOutfit(_loc1.player_id);
 	}
-	/*public function handleStartNPC(obj) {
-		obj.shift();
-		var room_id = obj.shift()
-		var _loc4 = SHELL.npcObjStr;
-		for (var key in _loc4) {
-			if (_loc4.hasOwnProperty(key)) {
-				var item = _loc4[key];
-				var roomId = key.split('_')[0];
-				if (roomId === room_id) {
-					var joinArr = [item.uniqueId, item.username, item.bitmask];
-					for (var objKey in item.itemsObj) {
-						joinArr.push(item.itemsObj[objKey]);
-					}
-					var npcStr = joinArr.join('|');
-					if(item.isEnabled) {
-						SHELL.sendNPCToRoom(roomId, npcStr);
-					}
-				}
-			}
-		}
-	}*/
 	public function handleStartNPC(obj) {
 		obj.shift();
 		var room_id = obj.shift()
