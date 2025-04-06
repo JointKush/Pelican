@@ -1,26 +1,42 @@
-﻿class com.customs.Plugins.pluginDispenser {
-	
-	var __set__plugins, customPlugins, wildCardPlugins;
-	public function pluginDispenser (plugins) {
-		super();
-		trace("Plugins Loaded: " + plugins.length);
-		this.__set__plugins(plugins);
-	}
-	
-	public function set plugins(plugins) {
-		for (var i in plugins) {
-			if(plugins[i].isDisabled !== true) {
-				var pluginName = plugins[i].name;
-				var pluginLength = pluginName.length
-				var wildCard = plugins[i].wildCard;
-				var pluginSplit = pluginName.split(".");
-				if (wildCard && wildCard !== undefined) {
-					wildCardPlugins = pluginSplit[1].substring(0, pluginSplit[1].length);
-					trace("Wild Card Plugin " + wildCardPlugins);
-					wildCardPlugins = new com.customs.Plugins[pluginSplit[0]][wildCardPlugins]();
-				}
-				customPlugins = new com.customs.Plugins[pluginName]();
-			}
-		}
-	}
+class com.customs.Plugins.pluginDispenser {
+    
+    private var customPlugins:Array;
+    private var wildCardPlugins:Array;
+
+    public function pluginDispenser(plugins:Array) {
+        super();
+        trace("Plugins Loaded: " + plugins.length);
+        this.plugins = plugins; 
+    }
+
+    public function set plugins(plugins:Array):Void {
+        customPlugins = [];
+        wildCardPlugins = [];
+        
+        for (var i:Number = 0; i < plugins.length; i++) {
+            var plugin = plugins[i];
+            
+            if (plugin.isDisabled !== true) { 
+                var pluginName:String = plugin.name;
+                var pluginSplit:Array = pluginName.split(".");
+                var wildCard:String = plugin.wildCard;
+                
+                if (wildCard && wildCard !== undefined) {
+                    var wildCardPluginName:String = pluginSplit[1];
+                    trace("Wild Card Plugin: " + wildCardPluginName);
+                    wildCardPlugins.push(new com.customs.Plugins[pluginSplit[0]][wildCardPluginName]());
+                } else {
+                    customPlugins.push(new com.customs.Plugins[pluginName]());
+                }
+            }
+        }
+    }
+
+    public function getCustomPlugins():Array {
+        return customPlugins;
+    }
+
+    public function getWildCardPlugins():Array {
+        return wildCardPlugins;
+    }
 }
