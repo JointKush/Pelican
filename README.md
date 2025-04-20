@@ -1,4 +1,4 @@
-# Pelican
+# Pelican - Revision
 
 Club Penguin AS2 Dependencies Manager
 
