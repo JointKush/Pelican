@@ -1,34 +1,55 @@
-class com.customs.Plugins.pluginDispenser {
-    
+﻿class com.customs.Plugins.pluginDispenser {
+
     private var customPlugins:Array;
     private var wildCardPlugins:Array;
+    private var pluginManager:com.customs.PluginManager;
 
     public function pluginDispenser(plugins:Array) {
         super();
-        trace("Plugins Loaded: " + plugins.length);
-        this.plugins = plugins; 
+        this.pluginManager = com.customs.PluginManager.getInstance();
+        this.plugins = plugins;
     }
 
     public function set plugins(plugins:Array):Void {
         customPlugins = [];
         wildCardPlugins = [];
-        
+
         for (var i:Number = 0; i < plugins.length; i++) {
-            var plugin = plugins[i];
-            
-            if (plugin.isDisabled !== true) { 
-                var pluginName:String = plugin.name;
-                var pluginSplit:Array = pluginName.split(".");
-                var wildCard:String = plugin.wildCard;
-                
-                if (wildCard && wildCard !== undefined) {
-                    var wildCardPluginName:String = pluginSplit[1];
-                    trace("Wild Card Plugin: " + wildCardPluginName);
-                    wildCardPlugins.push(new com.customs.Plugins[pluginSplit[0]][wildCardPluginName]());
-                } else {
-                    customPlugins.push(new com.customs.Plugins[pluginName]());
-                }
+            var pluginDef:Object = plugins[i];
+            if (pluginDef.isDisabled === true) continue;
+
+            var pluginName:String = pluginDef.name;
+            var pluginSplit:Array = pluginName.split(".");
+            var wildCard:String = pluginDef.wildCard;
+            var pluginClass:Object;
+            var pluginInstance:Object;
+
+            if (wildCard && wildCard !== undefined) {
+                var wildCardPluginName:String = pluginSplit[1];
+                pluginClass = com.customs.Plugins[pluginSplit[0]][wildCardPluginName];
+                pluginInstance = new pluginClass();
+                wildCardPlugins.push(pluginInstance);
+            } else {
+                pluginClass = com.customs.Plugins[pluginName];
+                pluginInstance = new pluginClass();
+                customPlugins.push(pluginInstance);
             }
+
+            var metadata:Object = pluginDef.metadata || {
+                name: pluginName,
+                version: "1.0.0",
+                dependencies: pluginDef.dependencies || []
+            };
+            this.pluginManager.registerPlugin(pluginName, pluginInstance, metadata);
+        }
+
+        for (var i:Number = 0; i < plugins.length; i++) {
+            var pluginDef:Object = plugins[i];
+            if (pluginDef.isDisabled === true) continue;
+            var name:String = pluginDef.name;
+			if (this.pluginManager.getPluginStatus(name) != "ready" && this.pluginManager.dependenciesMet(name)) {
+				this.pluginManager.markReady(name);
+			}
         }
     }
 
