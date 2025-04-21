@@ -2,7 +2,6 @@
     
     /**
      * Settings class manages plugins and configuration.
-     * You can load plugins from sub-folders by flagging them with "wildCard" and setting the folder name between ".".
      */
     
     public function Settings() {}
