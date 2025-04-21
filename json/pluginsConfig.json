@@ -1,0 +1,10 @@
+[
+    {
+        "name": "PartySwitcher",
+        "version": "1.0",
+        "author": "Reed",
+        "description": "Sets the partty selected for that room",
+        "dependencies": [],
+        "isDisabled": false
+    }
+]
