@@ -11,7 +11,10 @@
 		wildCardPlugins = [];
 		pluginMap = {};
 		visited = {};
-		setPlugins(plugins);
+
+		if (plugins.length > 0) {
+		   setPlugins(plugins);
+		}
 	}
 
 	public function setPlugins(plugins:Array):Void {
