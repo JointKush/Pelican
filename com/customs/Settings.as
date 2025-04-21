@@ -8,7 +8,7 @@
 
     static var localPath: String = "http://localhost/";
 	
-	static var allowPlugins:Array = [
+    static var allowPlugins:Array = [
         com.customs.Plugins.PartySwitcher
     ];
 
